@@ -1,0 +1,23 @@
+{
+  "name": "phaser-tutorial-game",
+  "version": "1.0.0",
+  "description": "simple game built using a phaser.js game engine tutorial",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./public -p 4321"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mistakeets/Phaser-Tutorial-Game.git"
+  },
+  "author": "Keith Oppel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mistakeets/Phaser-Tutorial-Game/issues"
+  },
+  "homepage": "https://github.com/mistakeets/Phaser-Tutorial-Game#readme",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}
