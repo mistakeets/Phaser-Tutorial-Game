@@ -27,11 +27,10 @@ function create() {
   ledge.body.immovable = true
   ledge = platforms.create(-150, 250, 'ground')
   ledge.body.immovable = true
-
 }
 
 function update() {
-
+  var hitPlatform = game.physics.arcade.collide(player, platforms)
 }
 
 player = game.add.sprite(32, game.world.height - 150, 'dude')
