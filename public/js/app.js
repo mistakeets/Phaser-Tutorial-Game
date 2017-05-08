@@ -1,8 +1,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   preload: preload,
   create: create,
-  update,
-  update
+  update: update
 })
 
 function preload() {
@@ -11,6 +10,14 @@ function preload() {
   game.load.image('star', 'assets/star.png');
   game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
+
+var player
+var platforms
+var cursors
+
+var stars
+var score = 0
+var scoreText
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE)
@@ -28,7 +35,14 @@ function create() {
   ledge = platforms.create(-150, 250, 'ground')
   ledge.body.immovable = true
 
-  cursors = game.input.keyboard.createCursorkeys()
+  player = game.add.sprite(32, game.world.height - 150, 'dude')
+  game.physics.arcade.enable(player)
+  player.body.bounce.y = 0.2
+  player.body.gravity.y = 300
+  player.body.collideWorldBounds = true
+
+  player.animations.add('left', [0, 1, 2, 3], 10, true)
+  player.animations.add('right', [5, 6, 7, 8], 10, true)
 
   stars = game.add.group()
   stars.enableBody = true
@@ -39,8 +53,7 @@ function create() {
     star.body.bounce.y = 0.7 + Math.random() * 0.2
   }
 
-  var score = 0
-  var scoreText
+  cursors = game.input.keyboard.createCursorKeys()
 
   scoreText = game.add.text(16, 16, 'score: 0', {
     fontSize: '32px',
@@ -64,17 +77,6 @@ function update() {
     player.body.velocity.y = -350
   }
 }
-
-
-player = game.add.sprite(32, game.world.height - 150, 'dude')
-game.physics.arcade.enable(player)
-
-player.body.bounce.y = 0.2
-player.body.gravity.y = 300
-player.body.collideWorldBounds = true
-
-player.animations.add('left', [0, 1, 2, 3], 10, true)
-player.animations.add('right' [5, 6, 7, 8], 10, true)
 
 function collectStar(player, star) {
   star.kill()
