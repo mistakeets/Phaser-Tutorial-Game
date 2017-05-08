@@ -27,11 +27,27 @@ function create() {
   ledge.body.immovable = true
   ledge = platforms.create(-150, 250, 'ground')
   ledge.body.immovable = true
+
+  cursors = game.input.keyboard.createCursorkeys()
 }
 
 function update() {
   var hitPlatform = game.physics.arcade.collide(player, platforms)
+
+  if (cursors.left.isDown) {
+    player.body.velocity.x = 150
+  } else if (cursors.right.isDown) {
+    player.body.velocity.x = 150
+    player.animations.play('right')
+  } else {
+    player.animations.stop()
+    player.frame = 4
+  }
+  if (cursors.up.isDown && player.body.touch.down && hitPlatform) {
+    player.body.velocity.y = -350
+  }
 }
+
 
 player = game.add.sprite(32, game.world.height - 150, 'dude')
 game.physics.arcade.enable(player)
